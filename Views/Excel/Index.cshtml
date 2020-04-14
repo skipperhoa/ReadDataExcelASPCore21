@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Read file</h2>
+        <form asp-controller="Excel" asp-action="Index" enctype="multipart/form-data">
+           @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label>Choose excel file</label>
+                <input type="file" name="file" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="submit" value="Upload"/>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        @if(ViewBag.products!=null)
+        {
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>UrlImage</th>
+                    <th>Price</th>
+                    <th>Detail</th>
+                </tr>
+                @foreach(var item in ViewBag.products)
+                {
+                    <tr>
+                        <td>@item.idProduct</td>
+                        <td>@item.Title</td>
+                        <td>@item.UrlImage</td>
+                        <td>@item.Price</td>
+                        <td>@item.Detail</td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>
+
